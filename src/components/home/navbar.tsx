@@ -10,6 +10,7 @@ import { usePathname, useRouter } from "next/navigation";
 import { useState } from "react";
 import { HiOutlineUserCircle } from "react-icons/hi2";
 import { IoIosNotificationsOutline } from "react-icons/io";
+import ServicesMegaMenu from "./services-mega-menu";
 
 interface NavbarProps {
   isLoggedInView?: boolean;
@@ -20,7 +21,6 @@ interface NavbarProps {
 
 const Navbar = ({ isLoggedInView, onSidebarToggle, onLocationPickerToggle, onAuthModalToggle }: NavbarProps = {}) => {
   const { currentUser } = useAuth();
-  const [isMegaOpen, setIsMegaOpen] = useState(false);
   const router = useRouter();
   const pathname = usePathname();
 
@@ -80,103 +80,7 @@ const Navbar = ({ isLoggedInView, onSidebarToggle, onLocationPickerToggle, onAut
             </Link>
           </li>
 
-          <li className="relative">
-            <button
-              className="flex items-center gap-1 py-2 text-gray-700 hover:text-blue-600 transition-colors"
-              onMouseEnter={() => setIsMegaOpen(true)}
-              onMouseLeave={() => setIsMegaOpen(false)}
-            >
-              Services
-              {isLoggedIn && (
-                <span className="inline-flex items-center justify-center w-5 h-5 text-xs font-bold text-white bg-red-500 rounded-full">
-                  1
-                </span>
-              )}
-            </button>
-
-            {/* Mega menu panel */}
-            {isMegaOpen && (
-              <div
-                className="absolute left-1/2 top-8 -translate-x-1/2 w-[820px] bg-white rounded-lg shadow-xl border border-gray-100 p-6 z-50"
-                onMouseEnter={() => setIsMegaOpen(true)}
-                onMouseLeave={() => setIsMegaOpen(false)}
-              >
-                <div className="grid grid-cols-3 gap-6">
-                  <div>
-                    <h4 className="text-sm font-semibold mb-3 text-gray-900">
-                      Resume writing
-                    </h4>
-                    <ul className="space-y-2 text-sm text-gray-600">
-                      <li className="hover:text-gray-900 cursor-pointer">
-                        Text resume
-                      </li>
-                      <li className="hover:text-gray-900 cursor-pointer">
-                        Visual resume
-                      </li>
-                      <li className="hover:text-gray-900 cursor-pointer">
-                        Resume critique
-                      </li>
-                    </ul>
-
-                    <h4 className="text-sm font-semibold mt-6 mb-3 text-gray-900">
-                      Find Jobs
-                    </h4>
-                    <ul className="space-y-2 text-sm text-gray-600">
-                      <li className="hover:text-gray-900 cursor-pointer">
-                        Jobs4u
-                      </li>
-                      <li className="hover:text-gray-900 cursor-pointer">
-                        Priority applicant
-                      </li>
-                      <li className="hover:text-gray-900 cursor-pointer">
-                        Contact us
-                      </li>
-                    </ul>
-                  </div>
-
-                  <div>
-                    <h4 className="text-sm font-semibold mb-3 text-gray-900">
-                      Get recruiter&apos;s attention
-                    </h4>
-                    <ul className="space-y-2 text-sm text-gray-600">
-                      <li className="hover:text-gray-900 cursor-pointer">
-                        Resume display
-                      </li>
-                    </ul>
-
-                    <h4 className="text-sm font-semibold mt-6 mb-3 text-gray-900">
-                      Monthly subscriptions
-                    </h4>
-                    <ul className="space-y-2 text-sm text-gray-600">
-                      <li className="hover:text-gray-900 cursor-pointer">
-                        Basic & premium plans
-                      </li>
-                    </ul>
-                  </div>
-
-                  <div>
-                    <h4 className="text-sm font-semibold mb-3 text-gray-900">
-                      Free resume resources
-                    </h4>
-                    <ul className="space-y-2 text-sm text-gray-600">
-                      <li className="hover:text-gray-900 cursor-pointer">
-                        Resume maker
-                      </li>
-                      <li className="hover:text-gray-900 cursor-pointer">
-                        Resume quality score
-                      </li>
-                      <li className="hover:text-gray-900 cursor-pointer">
-                        Resume samples
-                      </li>
-                      <li className="hover:text-gray-900 cursor-pointer">
-                        Job letter samples
-                      </li>
-                    </ul>
-                  </div>
-                </div>
-              </div>
-            )}
-          </li>
+          <ServicesMegaMenu isLoggedIn={!!isLoggedIn} />
         </ul>
 
         {/* Right side controls */}
@@ -185,7 +89,7 @@ const Navbar = ({ isLoggedInView, onSidebarToggle, onLocationPickerToggle, onAut
           <div className="hidden lg:flex items-center gap-4">
             <button
               onClick={() => onAuthModalToggle?.(true)}
-              className="px-5 py-2 rounded-full border-2 border-blue-600 text-sm text-blue-600 font-semibold hover:bg-blue-50 transition-colors"
+              className="px-5 py-2 rounded-full border border-blue-600 text-sm text-blue-600 font-semibold hover:bg-blue-50 transition-colors"
             >
               Login
             </button>
