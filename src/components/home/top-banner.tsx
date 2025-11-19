@@ -1,4 +1,9 @@
-import { Facebook, Instagram, Linkedin, Video } from "lucide-react";
+import {
+  AiFillFacebook,
+  AiFillInstagram,
+  AiFillLinkedin,
+  AiFillTikTok,
+} from "react-icons/ai";
 
 const TopBanner = () => {
   return (
@@ -29,7 +34,7 @@ const TopBanner = () => {
             rel="noopener noreferrer"
             className="text-white hover:text-blue-300 transition-all duration-300 p-1 rounded hover:scale-110  group"
           >
-            <Facebook
+            <AiFillFacebook
               size={18}
               className="sm:w-5 sm:h-5 group-hover:drop-shadow-sm"
             />
@@ -41,7 +46,7 @@ const TopBanner = () => {
             rel="noopener noreferrer"
             className="text-white hover:text-pink-300 transition-all duration-300 p-1 rounded hover:scale-110  group"
           >
-            <Video
+            <AiFillTikTok
               size={18}
               className="sm:w-5 sm:h-5 group-hover:drop-shadow-sm"
             />
@@ -53,7 +58,7 @@ const TopBanner = () => {
             rel="noopener noreferrer"
             className="text-white hover:text-pink-400 transition-all duration-300 p-1 rounded hover:scale-110  group"
           >
-            <Instagram
+            <AiFillInstagram
               size={18}
               className="sm:w-5 sm:h-5 group-hover:drop-shadow-sm"
             />
@@ -65,7 +70,7 @@ const TopBanner = () => {
             rel="noopener noreferrer"
             className="text-white hover:text-blue-400 transition-all duration-300 p-1 rounded hover:scale-110  group"
           >
-            <Linkedin
+            <AiFillLinkedin
               size={18}
               className="sm:w-5 sm:h-5 group-hover:drop-shadow-sm"
             />
