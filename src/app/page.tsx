@@ -1,5 +1,6 @@
 "use client";
 
+import LocationPickerModal from "@/components/home/location-picker-modal";
 import Navbar from "@/components/home/navbar";
 import ProfileSidebar from "@/components/home/profile-sidebar";
 import TopBanner from "@/components/home/top-banner";
@@ -8,6 +9,7 @@ import { useState } from "react";
 export default function HomePage() {
   const [isLoggedInView, setIsLoggedInView] = useState(false);
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+  const [isLocationPickerOpen, setIsLocationPickerOpen] = useState(false);
 
   return (
     <div className="bg-linear-to-br from-blue-50 to-blue-100 min-h-screen">
@@ -17,12 +19,16 @@ export default function HomePage() {
           <Navbar 
             isLoggedInView={isLoggedInView} 
             onSidebarToggle={setIsSidebarOpen}
+            onLocationPickerToggle={setIsLocationPickerOpen}
           />
         </div>
       </div>
 
       {/* Profile Sidebar - at page level to avoid stacking context issues */}
       <ProfileSidebar isOpen={isSidebarOpen} onClose={() => setIsSidebarOpen(false)} />
+
+      {/* Location Picker Modal - at page level to render above everything */}
+      <LocationPickerModal isOpen={isLocationPickerOpen} onClose={() => setIsLocationPickerOpen(false)} />
 
       {/* Demo Toggle Button */}
       <div className="fixed bottom-6 right-6 z-40">

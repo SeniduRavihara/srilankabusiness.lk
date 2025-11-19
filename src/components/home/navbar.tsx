@@ -3,7 +3,7 @@
 import { logo } from "@/assets";
 import { useAuth } from "@/hooks/useAuth";
 import { cn } from "@/lib/utils";
-import { ChevronDown, Menu, Search } from "lucide-react";
+import { ChevronDown, Menu, Search, MapPin } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
@@ -14,9 +14,10 @@ import { IoIosNotificationsOutline } from "react-icons/io";
 interface NavbarProps {
   isLoggedInView?: boolean;
   onSidebarToggle?: (open: boolean) => void;
+  onLocationPickerToggle?: (open: boolean) => void;
 }
 
-const Navbar = ({ isLoggedInView, onSidebarToggle }: NavbarProps = {}) => {
+const Navbar = ({ isLoggedInView, onSidebarToggle, onLocationPickerToggle }: NavbarProps = {}) => {
   const { currentUser } = useAuth();
   const [isMegaOpen, setIsMegaOpen] = useState(false);
   const router = useRouter();
@@ -202,9 +203,19 @@ const Navbar = ({ isLoggedInView, onSidebarToggle }: NavbarProps = {}) => {
           </div>
         ) : (
           // Logged In State
-          <div className="hidden lg:flex items-center gap-5">
+          <div className="hidden lg:flex items-center gap-3">
+
+            {/* Location Picker Button */}
+            <button
+              onClick={() => onLocationPickerToggle?.(true)}
+              className="flex items-center gap-2 px-4 py-2 rounded-full border border-gray-300 text-sm text-gray-700 hover:border-blue-400 transition-colors duration-300 whitespace-nowrap"
+            >
+              <MapPin size={18} className="text-gray-600" />
+              <span>Select Location</span>
+            </button>
+              
             {/* Search Bar */}
-            <div className="flex items-center bg-gray-100 rounded-full px-4 py-2 w-72">
+            <div className="flex items-center bg-gray-100 rounded-full px-4 py-2 w-60">
               <input
                 type="text"
                 placeholder="Search jobs here"
@@ -212,6 +223,8 @@ const Navbar = ({ isLoggedInView, onSidebarToggle }: NavbarProps = {}) => {
               />
               <Search className="text-blue-600 ml-2" size={18} />
             </div>
+
+            
 
             {/* Notification Bell */}
             <div className="relative p-2 rounded-full hover:bg-gray-100 transition-colors cursor-pointer">
