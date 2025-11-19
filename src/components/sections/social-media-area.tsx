@@ -2,7 +2,28 @@
 
 import Image from "next/image";
 import Link from "next/link";
+import { useEffect, useState } from "react";
 import { appStore, fb, insta, linkedin, playStore, tiktok } from "@/assets";
+
+const SkeletonLoader = () => (
+  <div className="py-5 flex flex-col gap-5 md:flex-row items-center justify-between px-3 md:px-10">
+    <div className="social-links">
+      <div className="text-lg font-medium mb-3 text-center md:text-left bg-gray-300 h-6 w-32 rounded animate-pulse mx-auto md:mx-0"></div>
+      <div className="flex gap-4 justify-center md:justify-start">
+        {Array.from({ length: 4 }).map((_, index) => (
+          <div
+            key={index}
+            className="w-10 h-10 bg-gray-300 rounded animate-pulse"
+          ></div>
+        ))}
+      </div>
+    </div>
+    <div className="app-store-links flex gap-4">
+      <div className="w-30 h-10 bg-gray-300 rounded animate-pulse"></div>
+      <div className="w-30 h-10 bg-gray-300 rounded animate-pulse"></div>
+    </div>
+  </div>
+);
 
 const SocialMediaArea = ({
   facebookUrl = "https://www.facebook.com/srilankabusiness.lk",
@@ -19,6 +40,21 @@ const SocialMediaArea = ({
   instagramUrl?: string;
   tiktokUrl?: string;
 }) => {
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    // Simulate loading time for demo purposes
+    const timer = setTimeout(() => {
+      setIsLoading(false);
+    }, 1500);
+
+    return () => clearTimeout(timer);
+  }, []);
+
+  if (isLoading) {
+    return <SkeletonLoader />;
+  }
+
   return (
     <div className="py-5 flex flex-col gap-5 md:flex-row items-center justify-between px-3 md:px-10">
       <div className="social-links">

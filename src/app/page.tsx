@@ -8,6 +8,7 @@ import ProfileSidebar from "@/components/home/profile-sidebar";
 import TopBanner from "@/components/home/top-banner";
 import CategoriesArea from "@/components/sections/categories-area";
 import CatogarySlider from "@/components/sections/catogary-slider";
+import DiscriptionArea from "@/components/sections/discription-area";
 import PopularBrandsArea from "@/components/sections/popular-brands-area";
 import SearchArea from "@/components/sections/search-area";
 import ServicesArea from "@/components/sections/services-area";
@@ -61,6 +62,7 @@ export default function HomePage() {
         <ServicesArea />
         <PopularBrandsArea />
         <SocialMediaArea />
+        <DiscriptionArea />
       </div>
     </div>
   );
