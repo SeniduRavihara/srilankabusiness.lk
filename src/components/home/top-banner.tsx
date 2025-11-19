@@ -7,7 +7,7 @@ import {
 
 const TopBanner = () => {
   return (
-    <div className="w-full pt-[7px] pb-[7px] z-999 fixed top-0 left-0 bg-linear-to-r from-[#C69F02] via-[#F17E00] to-[#E31145] shadow-lg">
+    <div className="w-full pt-[7px] pb-[7px] fixed top-0 left-0 bg-linear-to-r from-[#C69F02] via-[#F17E00] to-[#E31145] shadow-lg" style={{ zIndex: 1 }}>
       <div className="max-w-7xl mx-auto px-4 flex justify-between items-center">
         {/* Contact Info */}
         <div className="text-xs sm:text-sm text-white">
