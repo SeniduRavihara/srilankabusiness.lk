@@ -15,9 +15,10 @@ interface NavbarProps {
   isLoggedInView?: boolean;
   onSidebarToggle?: (open: boolean) => void;
   onLocationPickerToggle?: (open: boolean) => void;
+  onAuthModalToggle?: (open: boolean) => void;
 }
 
-const Navbar = ({ isLoggedInView, onSidebarToggle, onLocationPickerToggle }: NavbarProps = {}) => {
+const Navbar = ({ isLoggedInView, onSidebarToggle, onLocationPickerToggle, onAuthModalToggle }: NavbarProps = {}) => {
   const { currentUser } = useAuth();
   const [isMegaOpen, setIsMegaOpen] = useState(false);
   const router = useRouter();
@@ -182,19 +183,19 @@ const Navbar = ({ isLoggedInView, onSidebarToggle, onLocationPickerToggle }: Nav
         {!isLoggedIn ? (
           // Logged Out State
           <div className="hidden lg:flex items-center gap-4">
-            <Link
-              href="/login"
+            <button
+              onClick={() => onAuthModalToggle?.(true)}
               className="px-5 py-2 rounded-full border-2 border-blue-600 text-sm text-blue-600 font-semibold hover:bg-blue-50 transition-colors"
             >
               Login
-            </Link>
+            </button>
 
-            <Link
-              href="/signup"
+            <button
+              onClick={() => onAuthModalToggle?.(true)}
               className="px-5 py-2 rounded-full text-sm text-white bg-red-500 font-semibold hover:bg-red-600 shadow-md transition-colors"
             >
               Register
-            </Link>
+            </button>
 
             <div className="flex items-center gap-1 text-sm text-gray-600 border-l border-gray-300 pl-4">
               <span>For employers</span>
