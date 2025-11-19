@@ -6,9 +6,11 @@ import LocationPickerModal from "@/components/home/location-picker-modal";
 import Navbar from "@/components/home/navbar";
 import ProfileSidebar from "@/components/home/profile-sidebar";
 import TopBanner from "@/components/home/top-banner";
+import BottomBanner from "@/components/bottom-banner";
 import CategoriesArea from "@/components/sections/categories-area";
 import CatogarySlider from "@/components/sections/catogary-slider";
 import DiscriptionArea from "@/components/sections/discription-area";
+import Footer from "@/components/footer";
 import PopularBrandsArea from "@/components/sections/popular-brands-area";
 import SearchArea from "@/components/sections/search-area";
 import ServicesArea from "@/components/sections/services-area";
@@ -64,6 +66,12 @@ export default function HomePage() {
         <SocialMediaArea />
         <DiscriptionArea />
       </div>
+
+      {/* Footer */}
+      <Footer />
+
+      {/* Bottom Banner */}
+      <BottomBanner />
     </div>
   );
 }

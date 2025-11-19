@@ -13,6 +13,14 @@ import yt from "./img/social-platforms/yt.png";
 import appStore from "./img/Download_on_the_App_Store_Badge.svg.png";
 import playStore from "./img/Google_Play_Store_badge_EN.svg.png";
 
+// Payment Method Icons
+import visa from "./img/visa.png";
+import master from "./img/master.png";
+import americanExpress from "./img/american-express.png";
+
+// Web Icon
+import web from "./img/social-platforms/web.png";
+
 export {
   logo,
   placeholderReviewPic,
@@ -24,4 +32,8 @@ export {
   yt,
   appStore,
   playStore,
+  visa,
+  master,
+  americanExpress,
+  web,
 };
