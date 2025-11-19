@@ -2,6 +2,7 @@
 
 import { cn } from "@/lib/utils";
 import * as React from "react";
+import { createPortal } from "react-dom";
 
 const SheetContext = React.createContext<{
   open: boolean;
@@ -55,6 +56,24 @@ const SheetTrigger = React.forwardRef<
 });
 SheetTrigger.displayName = "SheetTrigger";
 
+const SheetClose = React.forwardRef<
+  HTMLButtonElement,
+  React.ButtonHTMLAttributes<HTMLButtonElement>
+>(({ className, ...props }, ref) => {
+  const context = React.useContext(SheetContext);
+  if (!context) throw new Error("SheetClose must be used within Sheet");
+
+  return (
+    <button
+      ref={ref}
+      className={cn("", className)}
+      onClick={() => context.setOpen(false)}
+      {...props}
+    />
+  );
+});
+SheetClose.displayName = "SheetClose";
+
 const SheetContent = React.forwardRef<
   HTMLDivElement,
   React.HTMLAttributes<HTMLDivElement> & {
@@ -84,12 +103,16 @@ const SheetContent = React.forwardRef<
 
   const sideClasses = {
     top: "top-0 left-0 right-0 h-auto max-h-[80vh]",
-    right: "top-0 right-0 bottom-0 w-full max-w-sm",
+    right: "top-0 right-0 bottom-0 h-screen w-full max-w-sm",
     bottom: "bottom-0 left-0 right-0 h-auto max-h-[80vh]",
-    left: "top-0 left-0 bottom-0 w-full max-w-sm",
+    left: "top-0 left-0 bottom-0 h-screen w-full max-w-sm",
   };
 
-  return (
+  // If we're rendering on the server, avoid portal and return null
+  if (typeof document === "undefined") return null;
+
+  // Render overlay and sheet content into a portal attached to document.body
+  return createPortal(
     <>
       {/* Overlay */}
       <div
@@ -100,7 +123,7 @@ const SheetContent = React.forwardRef<
       <div
         ref={ref}
         className={cn(
-          "fixed z-50 bg-white shadow-lg transition-transform duration-300 ease-in-out",
+          "fixed z-50 bg-white shadow-lg transition-transform duration-300 ease-in-out flex flex-col h-screen",
           sideClasses[side],
           open
             ? "translate-x-0"
@@ -113,9 +136,10 @@ const SheetContent = React.forwardRef<
       >
         {children}
       </div>
-    </>
+    </>,
+    document.body
   );
 });
 SheetContent.displayName = "SheetContent";
 
-export { Sheet, SheetContent, SheetTrigger };
+export { Sheet, SheetClose, SheetContent, SheetTrigger };
