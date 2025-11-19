@@ -1,3 +1,4 @@
+import { CurrentUserDataType, StoreListType, StoreObj } from "@/types";
 import {
   createUserWithEmailAndPassword,
   sendEmailVerification,
@@ -5,7 +6,6 @@ import {
   signInWithPopup,
   signOut,
 } from "firebase/auth";
-import { auth, db, fbProvider, provider, storage } from "./config";
 import {
   addDoc,
   collection,
@@ -22,9 +22,9 @@ import {
   where,
 } from "firebase/firestore";
 import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
-import { CurrentUserDataType, StoreListType, StoreObj } from "@/types";
 import toast from "react-hot-toast";
 import { v4 } from "uuid";
+import { auth, db, fbProvider, provider, storage } from "./config";
 
 // --------------------------------------
 export const logout = async () => {
@@ -51,7 +51,14 @@ export const login = async ({
       password
     );
     // console.log(userCredential);
-    
+
+    const user = userCredential.user;
+
+    if (!user.emailVerified) {
+      await signOut(auth);
+      toast.error("Please verify your email before logging in.");
+      throw new Error("Email not verified");
+    }
 
     return userCredential.user;
   } catch (error: any) {
@@ -528,8 +535,6 @@ export const fetchCatogaryData = async (
   setLoadingStoreFetching(false);
 };
 
-
-
 // --------------------------------------------
 
 export const fetchTagData = async (
@@ -951,8 +956,6 @@ export const postEnquery = async (
     throw error;
   }
 };
-
-
 
 // ------------------------------------
 

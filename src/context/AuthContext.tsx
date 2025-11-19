@@ -1,3 +1,6 @@
+"use client";
+
+
 import { INITIAL_AUTH_CONTEXT } from "@/constants";
 import { auth, db } from "@/firebase/config";
 import { useData } from "@/hooks/useData";

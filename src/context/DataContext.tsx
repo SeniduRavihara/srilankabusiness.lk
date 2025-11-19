@@ -1,3 +1,6 @@
+"use client";
+
+
 import { INITIAL_DATA_CONTEXT } from "@/constants";
 import { db } from "@/firebase/config";
 import {

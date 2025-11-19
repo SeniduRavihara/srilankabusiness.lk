@@ -1,9 +1,12 @@
 "use client";
 
-import { useState } from "react";
+import { facebookSignIn, googleSignIn, login, signup } from "@/firebase/api";
 import { X } from "lucide-react";
-import { FaGoogle, FaFacebook } from "react-icons/fa";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
+import { useState } from "react";
+import toast from "react-hot-toast";
+import { FaFacebook, FaGoogle } from "react-icons/fa";
 
 interface AuthModalProps {
   isOpen: boolean;
@@ -12,6 +15,83 @@ interface AuthModalProps {
 
 const AuthModal = ({ isOpen, onClose }: AuthModalProps) => {
   const [activeTab, setActiveTab] = useState<"login" | "register">("login");
+  const [loginData, setLoginData] = useState({ email: "", password: "" });
+  const [registerData, setRegisterData] = useState({
+    email: "",
+    password: "",
+    confirmPassword: "",
+    name: "",
+  });
+  const [loading, setLoading] = useState(false);
+  const router = useRouter();
+
+  const handleLogin = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setLoading(true);
+    try {
+      await login(loginData);
+      toast.success("Login successful!");
+      onClose();
+      router.push("/");
+    } catch (error) {
+      // Error is handled in the login function
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const handleRegister = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (registerData.password !== registerData.confirmPassword) {
+      toast.error("Passwords do not match");
+      return;
+    }
+    setLoading(true);
+    try {
+      await signup({
+        email: registerData.email,
+        password: registerData.password,
+        name: registerData.name,
+      });
+      toast.success(
+        "Registration successful! Please check your email for verification."
+      );
+      onClose();
+      router.push("/login");
+    } catch (error) {
+      // Error is handled in the signup function
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const handleGoogleLogin = async () => {
+    setLoading(true);
+    try {
+      await googleSignIn();
+      toast.success("Login successful!");
+      onClose();
+      router.push("/");
+    } catch (error) {
+      toast.error("Google login failed. Please try again.");
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const handleFacebookLogin = async () => {
+    setLoading(true);
+    try {
+      await facebookSignIn();
+      toast.success("Login successful!");
+      onClose();
+      router.push("/");
+    } catch (error) {
+      toast.error("Facebook login failed. Please try again.");
+    } finally {
+      setLoading(false);
+    }
+  };
 
   return (
     <>
@@ -68,7 +148,7 @@ const AuthModal = ({ isOpen, onClose }: AuthModalProps) => {
           {activeTab === "login" ? (
             // Login Form
             <div className="px-6 py-6 bg-white">
-              <div className="space-y-4">
+              <form onSubmit={handleLogin} className="space-y-4">
                 <div>
                   <label className="block text-sm font-semibold text-gray-900 mb-2">
                     Email ID / Username
@@ -77,6 +157,11 @@ const AuthModal = ({ isOpen, onClose }: AuthModalProps) => {
                     type="text"
                     placeholder="Enter your active Email ID / Username"
                     className="w-full px-4 py-2.5 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm"
+                    value={loginData.email}
+                    onChange={(e) =>
+                      setLoginData({ ...loginData, email: e.target.value })
+                    }
+                    required
                   />
                 </div>
 
@@ -88,6 +173,11 @@ const AuthModal = ({ isOpen, onClose }: AuthModalProps) => {
                     type="password"
                     placeholder="Enter your password"
                     className="w-full px-4 py-2.5 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm"
+                    value={loginData.password}
+                    onChange={(e) =>
+                      setLoginData({ ...loginData, password: e.target.value })
+                    }
+                    required
                   />
                   <Link
                     href="/reset-password"
@@ -97,13 +187,13 @@ const AuthModal = ({ isOpen, onClose }: AuthModalProps) => {
                   </Link>
                 </div>
 
-                <Link
-                  href="/login"
-                  onClick={onClose}
-                  className="block w-full px-6 py-2.5 bg-blue-600 text-white rounded-full hover:bg-blue-700 transition-colors font-semibold text-center text-sm mt-4"
+                <button
+                  type="submit"
+                  disabled={loading}
+                  className="block w-full px-6 py-2.5 bg-blue-600 text-white rounded-full hover:bg-blue-700 transition-colors font-semibold text-center text-sm mt-4 disabled:opacity-50"
                 >
-                  Login
-                </Link>
+                  {loading ? "Logging in..." : "Login"}
+                </button>
 
                 <div className="relative flex items-center my-4">
                   <div className="flex-1 border-t border-gray-300" />
@@ -111,21 +201,45 @@ const AuthModal = ({ isOpen, onClose }: AuthModalProps) => {
                   <div className="flex-1 border-t border-gray-300" />
                 </div>
 
-                <button className="w-full border border-gray-300 hover:border-blue-600 text-gray-700 font-semibold py-2.5 rounded-full transition-colors flex items-center justify-center gap-2">
+                <button
+                  onClick={handleGoogleLogin}
+                  disabled={loading}
+                  className="w-full border border-gray-300 hover:border-blue-600 text-gray-700 font-semibold py-2.5 rounded-full transition-colors flex items-center justify-center gap-2 disabled:opacity-50"
+                >
                   <FaGoogle className="w-5 h-5 text-red-500" />
                   Sign in with Google
                 </button>
 
-                <button className="w-full border border-gray-300 hover:border-blue-600 text-gray-700 font-semibold py-2.5 rounded-full transition-colors flex items-center justify-center gap-2">
+                <button
+                  onClick={handleFacebookLogin}
+                  disabled={loading}
+                  className="w-full border border-gray-300 hover:border-blue-600 text-gray-700 font-semibold py-2.5 rounded-full transition-colors flex items-center justify-center gap-2 disabled:opacity-50"
+                >
                   <FaFacebook className="w-5 h-5 text-blue-600" />
                   Sign in with Facebook
                 </button>
-              </div>
+              </form>
             </div>
           ) : (
             // Register Form
             <div className="px-6 py-6 bg-white">
-              <div className="space-y-4">
+              <form onSubmit={handleRegister} className="space-y-4">
+                <div>
+                  <label className="block text-sm font-semibold text-gray-900 mb-2">
+                    Name
+                  </label>
+                  <input
+                    type="text"
+                    placeholder="Enter your name"
+                    className="w-full px-4 py-2.5 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm"
+                    value={registerData.name}
+                    onChange={(e) =>
+                      setRegisterData({ ...registerData, name: e.target.value })
+                    }
+                    required
+                  />
+                </div>
+
                 <div>
                   <label className="block text-sm font-semibold text-gray-900 mb-2">
                     Email Address
@@ -134,6 +248,14 @@ const AuthModal = ({ isOpen, onClose }: AuthModalProps) => {
                     type="email"
                     placeholder="Enter your email address"
                     className="w-full px-4 py-2.5 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm"
+                    value={registerData.email}
+                    onChange={(e) =>
+                      setRegisterData({
+                        ...registerData,
+                        email: e.target.value,
+                      })
+                    }
+                    required
                   />
                 </div>
 
@@ -145,6 +267,14 @@ const AuthModal = ({ isOpen, onClose }: AuthModalProps) => {
                     type="password"
                     placeholder="Create a password"
                     className="w-full px-4 py-2.5 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm"
+                    value={registerData.password}
+                    onChange={(e) =>
+                      setRegisterData({
+                        ...registerData,
+                        password: e.target.value,
+                      })
+                    }
+                    required
                   />
                 </div>
 
@@ -156,6 +286,14 @@ const AuthModal = ({ isOpen, onClose }: AuthModalProps) => {
                     type="password"
                     placeholder="Confirm your password"
                     className="w-full px-4 py-2.5 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm"
+                    value={registerData.confirmPassword}
+                    onChange={(e) =>
+                      setRegisterData({
+                        ...registerData,
+                        confirmPassword: e.target.value,
+                      })
+                    }
+                    required
                   />
                 </div>
 
@@ -166,13 +304,13 @@ const AuthModal = ({ isOpen, onClose }: AuthModalProps) => {
                   </span>
                 </label>
 
-                <Link
-                  href="/signup"
-                  onClick={onClose}
-                  className="block w-full px-6 py-2.5 bg-blue-600 text-white rounded-full hover:bg-blue-700 transition-colors font-semibold text-center text-sm mt-4"
+                <button
+                  type="submit"
+                  disabled={loading}
+                  className="block w-full px-6 py-2.5 bg-blue-600 text-white rounded-full hover:bg-blue-700 transition-colors font-semibold text-center text-sm mt-4 disabled:opacity-50"
                 >
-                  Register
-                </Link>
+                  {loading ? "Registering..." : "Register"}
+                </button>
 
                 <div className="relative flex items-center my-4">
                   <div className="flex-1 border-t border-gray-300" />
@@ -180,16 +318,24 @@ const AuthModal = ({ isOpen, onClose }: AuthModalProps) => {
                   <div className="flex-1 border-t border-gray-300" />
                 </div>
 
-                <button className="w-full border border-gray-300 hover:border-blue-600 text-gray-700 font-semibold py-2.5 rounded-full transition-colors flex items-center justify-center gap-2">
+                <button
+                  onClick={handleGoogleLogin}
+                  disabled={loading}
+                  className="w-full border border-gray-300 hover:border-blue-600 text-gray-700 font-semibold py-2.5 rounded-full transition-colors flex items-center justify-center gap-2 disabled:opacity-50"
+                >
                   <FaGoogle className="w-5 h-5 text-red-500" />
                   Sign up with Google
                 </button>
 
-                <button className="w-full border border-gray-300 hover:border-blue-600 text-gray-700 font-semibold py-2.5 rounded-full transition-colors flex items-center justify-center gap-2">
+                <button
+                  onClick={handleFacebookLogin}
+                  disabled={loading}
+                  className="w-full border border-gray-300 hover:border-blue-600 text-gray-700 font-semibold py-2.5 rounded-full transition-colors flex items-center justify-center gap-2 disabled:opacity-50"
+                >
                   <FaFacebook className="w-5 h-5 text-blue-600" />
                   Sign up with Facebook
                 </button>
-              </div>
+              </form>
             </div>
           )}
         </div>
