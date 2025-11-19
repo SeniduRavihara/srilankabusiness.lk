@@ -15,7 +15,7 @@ const CategoryCard = ({ label, icon }: { label: string; icon: string }) => {
       </div>
 
       <div className="lg:hidden text-center flex flex-col items-center mt-5">
-        <div className="p-1 w-24 h-24 text-center flex-col bg-white flex items-center justify-center border-2 border-[#34343439] rounded-lg">
+        <div className="p-1 w-24 h-24 text-center flex-col bg-white flex items-center justify-center border border-[#34343439] rounded-lg">
           <img
             src={icon}
             className="w-7 xsm:w-10 flex items-center justify-center"

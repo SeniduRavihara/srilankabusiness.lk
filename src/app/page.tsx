@@ -8,6 +8,7 @@ import ProfileSidebar from "@/components/home/profile-sidebar";
 import TopBanner from "@/components/home/top-banner";
 import CategoriesArea from "@/components/sections/categories-area";
 import CatogarySlider from "@/components/sections/catogary-slider";
+import PopularBrandsArea from "@/components/sections/popular-brands-area";
 import SearchArea from "@/components/sections/search-area";
 import ServicesArea from "@/components/sections/services-area";
 import { useState } from "react";
@@ -57,6 +58,7 @@ export default function HomePage() {
         <CategoriesArea />
         <CatogarySlider />
         <ServicesArea />
+        <PopularBrandsArea />
       </div>
     </div>
   );

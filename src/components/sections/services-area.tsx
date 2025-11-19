@@ -37,7 +37,7 @@ const ServicesArea = () => {
         <center className="hidden lg:block">
           <div className="other-services">
             {/* Bills & Recharge Skeleton */}
-            <div className="fstotsediv w-[80%] flex gap-3 items-center justify-between flex-col xl:flex-row p-5 border-2 border-[#00000037] rounded-t-md rounded-b-0">
+            <div className="fstotsediv w-[80%] flex gap-3 items-center justify-between flex-col xl:flex-row p-5 border border-[#00000037] rounded-t-md rounded-b-0">
               <div className="oth-ser-div-left">
                 <div className="h-6 bg-gray-300 rounded w-48 mb-2 animate-pulse"></div>
                 <div className="h-4 bg-gray-300 rounded w-64 mb-1 animate-pulse"></div>
@@ -56,7 +56,7 @@ const ServicesArea = () => {
             </div>
 
             {/* Travel Bookings Skeleton */}
-            <div className="w-[80%] flex gap-3 items-center justify-between flex-col xl:flex-row p-5 border-2 border-[#00000037] rounded-t-0 rounded-b-[7px]">
+            <div className="w-[80%] flex gap-3 items-center justify-between flex-col xl:flex-row p-5 border border-[#00000037] rounded-t-0 rounded-b-[7px]">
               <div className="oth-ser-div-lefta">
                 <div className="h-6 bg-gray-300 rounded w-40 mb-2 animate-pulse"></div>
                 <div className="h-4 bg-gray-300 rounded w-56 mb-1 animate-pulse"></div>
@@ -130,7 +130,7 @@ const ServicesArea = () => {
     <div className="">
       <center className="hidden lg:block">
         <div className="other-services">
-          <div className="fstotsediv w-[80%] flex gap-3 items-center justify-between flex-col xl:flex-row p-5 border-2 border-[#00000037] rounded-t-md rounded-b-0">
+          <div className="fstotsediv w-[80%] flex gap-3 items-center justify-between flex-col xl:flex-row p-5 border border-[#00000037] rounded-t-md rounded-b-0">
             <div className="oth-ser-div-left">
               <h1 className="text-2xl font-semibold">Bills & Recharge</h1>
               <p className="text-gray-600">
@@ -146,7 +146,7 @@ const ServicesArea = () => {
             <div className="oth-ser-div-right-section flex gap-4">
               {billsAndRechargeIcons.map((obj) => (
                 <div key={obj.title} className="text-center float-left mt-12">
-                  <div className="w-20 h-20 text-center bg-white flex items-center justify-center border-2 border-[#34343439] rounded-lg">
+                  <div className="w-20 h-20 text-center bg-white flex items-center justify-center border border-[#34343439] rounded-lg">
                     <Image
                       src={obj.icon}
                       alt={obj.title}
@@ -165,7 +165,7 @@ const ServicesArea = () => {
 
           {/* -------------------- */}
 
-          <div className="w-[80%] flex gap-3 items-center justify-between flex-col xl:flex-row p-5 border-2 border-[#00000037] rounded-t-0 rounded-b-[7px]">
+          <div className="w-[80%] flex gap-3 items-center justify-between flex-col xl:flex-row p-5 border border-[#00000037] rounded-t-0 rounded-b-[7px]">
             <div className="oth-ser-div-lefta">
               <h1 className="text-2xl font-semibold">Travel Bookings</h1>
               <p className="text-gray-600">
@@ -181,7 +181,7 @@ const ServicesArea = () => {
             <div className="oth-ser-div-right-section flex gap-5">
               {travelBookingsIcons.map((obj) => (
                 <div key={obj.title} className="text-center float-left mt-12">
-                  <div className="w-20 h-20 text-center bg-white flex items-center justify-center border-2 border-[#34343439] rounded-lg">
+                  <div className="w-20 h-20 text-center bg-white flex items-center justify-center border border-[#34343439] rounded-lg">
                     <Image
                       src={obj.icon}
                       alt={obj.title}
@@ -224,7 +224,7 @@ const ServicesArea = () => {
                   key={obj.title}
                   className="text-center flex flex-col items-center mt-12"
                 >
-                  <div className="w-20 h-20 xsm:w-24 xsm:h-24 sm:w-28 sm:h-28 text-center flex-col bg-white flex items-center justify-center border-2 border-[#34343439] rounded-lg">
+                  <div className="w-20 h-20 xsm:w-24 xsm:h-24 sm:w-28 sm:h-28 text-center flex-col bg-white flex items-center justify-center border border-[#34343439] rounded-lg">
                     <Image
                       src={obj.icon}
                       alt={obj.title}
@@ -265,7 +265,7 @@ const ServicesArea = () => {
                   key={obj.title}
                   className="text-center flex flex-col items-center mt-12"
                 >
-                  <div className="w-20 h-20 xsm:w-24 xsm:h-24 sm:w-28 sm:h-28 text-center flex-col bg-white flex items-center justify-center border-2 border-[#34343439] rounded-lg">
+                  <div className="w-20 h-20 xsm:w-24 xsm:h-24 sm:w-28 sm:h-28 text-center flex-col bg-white flex items-center justify-center border border-[#34343439] rounded-lg">
                     <Image
                       src={obj.icon}
                       alt={obj.title}
