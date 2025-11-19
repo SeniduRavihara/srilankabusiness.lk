@@ -11,6 +11,7 @@ import CatogarySlider from "@/components/sections/catogary-slider";
 import PopularBrandsArea from "@/components/sections/popular-brands-area";
 import SearchArea from "@/components/sections/search-area";
 import ServicesArea from "@/components/sections/services-area";
+import SocialMediaArea from "@/components/sections/social-media-area";
 import { useState } from "react";
 
 export default function HomePage() {
@@ -59,6 +60,7 @@ export default function HomePage() {
         <CatogarySlider />
         <ServicesArea />
         <PopularBrandsArea />
+        <SocialMediaArea />
       </div>
     </div>
   );
