@@ -7,6 +7,7 @@ import Navbar from "@/components/home/navbar";
 import ProfileSidebar from "@/components/home/profile-sidebar";
 import TopBanner from "@/components/home/top-banner";
 import CategoriesArea from "@/components/sections/categories-area";
+import CatogarySlider from "@/components/sections/catogary-slider";
 import SearchArea from "@/components/sections/search-area";
 import { useState } from "react";
 
@@ -53,6 +54,7 @@ export default function HomePage() {
         <SearchArea />
         <CarouselAdds />
         <CategoriesArea />
+        <CatogarySlider />
       </div>
     </div>
   );
