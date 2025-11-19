@@ -3,11 +3,10 @@
 import { logo } from "@/assets";
 import { useAuth } from "@/hooks/useAuth";
 import { cn } from "@/lib/utils";
-import { ChevronDown, Menu, Search, MapPin } from "lucide-react";
+import { ChevronDown, MapPin, Menu, Search } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
-import { useState } from "react";
 import { HiOutlineUserCircle } from "react-icons/hi2";
 import { IoIosNotificationsOutline } from "react-icons/io";
 import ServicesMegaMenu from "./services-mega-menu";
@@ -19,7 +18,12 @@ interface NavbarProps {
   onAuthModalToggle?: (open: boolean) => void;
 }
 
-const Navbar = ({ isLoggedInView, onSidebarToggle, onLocationPickerToggle, onAuthModalToggle }: NavbarProps = {}) => {
+const Navbar = ({
+  isLoggedInView,
+  onSidebarToggle,
+  onLocationPickerToggle,
+  onAuthModalToggle,
+}: NavbarProps = {}) => {
   const { currentUser } = useAuth();
   const router = useRouter();
   const pathname = usePathname();
@@ -109,7 +113,6 @@ const Navbar = ({ isLoggedInView, onSidebarToggle, onLocationPickerToggle, onAut
         ) : (
           // Logged In State
           <div className="hidden lg:flex items-center gap-3">
-
             {/* Location Picker Button */}
             <button
               onClick={() => onLocationPickerToggle?.(true)}
@@ -118,7 +121,7 @@ const Navbar = ({ isLoggedInView, onSidebarToggle, onLocationPickerToggle, onAut
               <MapPin size={18} className="text-gray-600" />
               <span>Select Location</span>
             </button>
-              
+
             {/* Search Bar */}
             <div className="flex items-center bg-gray-100 rounded-full px-4 py-2 w-60">
               <input
@@ -128,8 +131,6 @@ const Navbar = ({ isLoggedInView, onSidebarToggle, onLocationPickerToggle, onAut
               />
               <Search className="text-blue-600 ml-2" size={18} />
             </div>
-
-            
 
             {/* Notification Bell */}
             <div className="relative p-2 rounded-full hover:bg-gray-100 transition-colors cursor-pointer">

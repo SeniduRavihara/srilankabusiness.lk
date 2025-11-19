@@ -91,7 +91,7 @@ const ServicesMegaMenu = ({ isLoggedIn }: ServicesMegaMenuProps) => {
                       href={`/services/${service.title.toLowerCase().replace(/\s+/g, "-")}`}
                       className="flex flex-col items-center gap-1 p-2 rounded-lg hover:bg-blue-50 transition-colors group cursor-pointer"
                     >
-                      <div className="w-12 h-12 bg-gradient-to-br from-blue-50 to-blue-100 rounded-lg flex items-center justify-center group-hover:from-blue-100 group-hover:to-blue-200 transition-colors">
+                      <div className="w-12 h-12 bg-linear-to-br from-blue-50 to-blue-100 rounded-lg flex items-center justify-center group-hover:from-blue-100 group-hover:to-blue-200 transition-colors">
                         <IconComponent className="w-5 h-5 text-blue-600" />
                       </div>
                       <p className="text-xs font-semibold text-gray-700 text-center line-clamp-2">
@@ -130,7 +130,7 @@ const ServicesMegaMenu = ({ isLoggedIn }: ServicesMegaMenuProps) => {
                       href={`/services/${service.title.toLowerCase().replace(/\s+/g, "-")}`}
                       className="flex flex-col items-center gap-1 p-2 rounded-lg hover:bg-blue-50 transition-colors group cursor-pointer"
                     >
-                      <div className="w-12 h-12 bg-gradient-to-br from-blue-50 to-blue-100 rounded-lg flex items-center justify-center group-hover:from-blue-100 group-hover:to-blue-200 transition-colors">
+                      <div className="w-12 h-12 bg-linear-to-br from-blue-50 to-blue-100 rounded-lg flex items-center justify-center group-hover:from-blue-100 group-hover:to-blue-200 transition-colors">
                         <IconComponent className="w-5 h-5 text-blue-600" />
                       </div>
                       <p className="text-xs font-semibold text-gray-700 text-center line-clamp-2">
