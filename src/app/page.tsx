@@ -6,6 +6,7 @@ import LocationPickerModal from "@/components/home/location-picker-modal";
 import Navbar from "@/components/home/navbar";
 import ProfileSidebar from "@/components/home/profile-sidebar";
 import TopBanner from "@/components/home/top-banner";
+import CategoriesArea from "@/components/sections/categories-area";
 import SearchArea from "@/components/sections/search-area";
 import { useState } from "react";
 
@@ -51,6 +52,7 @@ export default function HomePage() {
       <div className="mt-24">
         <SearchArea />
         <CarouselAdds />
+        <CategoriesArea />
       </div>
     </div>
   );

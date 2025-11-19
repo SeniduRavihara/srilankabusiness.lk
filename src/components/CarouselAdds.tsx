@@ -21,7 +21,25 @@ const CarouselAdds = () => {
     }
   };
 
-  if (!sliderAdds || sliderAdds.length === 0) {
+  const CarouselSkeleton = () => (
+    <div className="w-full -mt-5 lg:mt-0">
+      <div className="animate-pulse">
+        <div className="bg-gray-300 rounded-lg w-full h-64"></div>
+      </div>
+    </div>
+  );
+
+  if (!sliderAdds) {
+    return (
+      <div className="w-full -mt-5 lg:mt-0">
+        <div className="animate-pulse">
+          <div className="bg-gray-300 rounded-lg w-full h-[400px]"></div>
+        </div>
+      </div>
+    );
+  }
+
+  if (sliderAdds.length === 0) {
     return (
       <div className="w-full -mt-5 lg:mt-0 flex items-center justify-center py-8">
         <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-600"></div>
